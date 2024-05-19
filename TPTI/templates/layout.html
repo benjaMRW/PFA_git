@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+  
+</head>
+<body>
+  <header>
+    <div class="header">
+      <a href="#default" class="logo">PeakForm-Academy</a>
+      <div class="header-right">
+        <a class="active" href="/">Home</a>
+        <a href="/feedback">Training-Feedback</a>
+      </div>
+    </div>
+  </header>
+  <hr width="200%" >
+  
+  <main>
+   
+    {% block content %}{% endblock %}
+    <hr />
+  </main>
+  <footer>
+    <p>© PeakForm-Academy</p>
+  </footer>
+</body>
+</html>
