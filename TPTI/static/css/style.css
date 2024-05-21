@@ -1,6 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+
+
+
+h1{
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 120%;
+}
 html
 {
-     background: #F8F4E1;
+  background-image: linear-gradient( #A67B5B, #F8F4E1);
      color: #543310
 }
 
@@ -16,34 +24,47 @@ ul
      top: 0;
 }
 .button{
-  background-color: gr;
+  background-color: #A67B5B;
   border: none;
   color: #543310;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  margin: 4px 2px;
+  margin: 8px 4px;
   cursor: pointer;
   border-radius: 16px;
+  font-family: "Georgia";
+  font-style: italic;
 }
+.button:hover{
+  background-color: #AF8F6F
+  }
 a{
+ 
   text-decoration: none;
+  color: #F8F4E1;
+  font-size: 180%;
+}
+a2{
+  text-decoration: none;
+  color: #F8F4E1;
+  font-size: 180%;
 }
 
 b1
 {
-     font-size: 180%;
-     font-family: 'Georgia';
+     font-size: 200%;
+     font-family: 'Roboto Condensed', sans-serif;
      text-indent: 2px;
 }
 h2{
-     font-size: 200%;
-     font-family: 'Georgia';
+     font-size: 250%;
+     font-family: 'Roboto Condensed', sans-serif;
 }
 .header {
      overflow: hidden;
-     background-color: #F8F4E1;
+     
      padding: 60px 40px;
      border-radius: 12px;
      color: #543310;
@@ -54,40 +75,41 @@ h2{
      text-align: center;
      padding: 12px;
      text-decoration: none;
-     font-size: 60px;
+     font-size: 80px;
      line-height: 25px;
      border-radius: 4px;
-     font-family: 'Georgia';
+     font-family: 'Roboto Condensed', sans-serif;
      font-weight: bold;
      font-style: italic;
-     text-shadow: 2px 2px 4px #A67B5B;
+     text-shadow: 2px 2px 4px  #F8F4E1;
      
    }
    /* Style the header links */
    .header a {
+    background-color: #F8F4E1;
      float: left;
-     color: #543310;
+     color:#543310;
      text-align: center;
      padding: 12px;
      text-decoration: none;
-     font-size: 22.4px;
+     font-size: 30px;
      line-height: 25px;
      border-radius: 4px;
-     font-family: 'Georgia';
+     font-family: 'Roboto Condensed', sans-serif;
      font-style: italic;
    }
    
    /* Change the background color on mouse-over */
    .header a:hover {
-     background-color: #AF8F6F;
-     color: #543310;
+     background-color: #543310;
+     color: #F8F4E1;
    }
    
    /* Style the active/current link*/
    .header a.active {
      background-color: #543310;
      color: white;
-     font-family: 'Georgia';
+     font-family: 'Roboto Condensed', sans-serif;
      font-size: 140%;
    }
    
@@ -110,6 +132,18 @@ h2{
 hr{
     display: block;
     border-width: 2px;
-    background-color: #543310;
+    
+    border-color: #543310;
 }
-
+footer{
+  display: block;
+  
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+img{
+  border-radius: 12px; 
+}
