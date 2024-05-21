@@ -1,11 +1,15 @@
 {%extends 'layout.html'%}
 {%block content%}
-<h2>{{level[1]}}</h2>
+<head>
+    <title>{{ sports[1] }} - {{ level[1] }}</title>
+</head>
+<body>
+    <h1>{{ sports[1] }}</h1>
+    <h2>{{ level[1] }}</h2>
+    <p>Details about the sport: {{ sports }}</p>
+    <p>Details about the level: {{ level }}</p>
+    <a href="/plan/{{sports[0]}}/{{level[0]}}/">hola</a>
+</body>
 
 
-<hr/>
-
-<p>{{level[2]}}</p>
-
-<hr/>
 {%endblock%}
