@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import sqlite3 
 
 app = Flask(__name__)
@@ -59,17 +59,27 @@ def plan(id1, id2, id3):
     level_data = cur.fetchone()
 
     # Fetch plan data; ensure the query matches your table schema
-    cur.execute('''SELECT Plan.* FROM Plan
-                   JOIN LevelPlans ON Plan.id = LevelPlans.pid
+    cur.execute('''SELECT plan.* FROM plan
+                   JOIN LevelPlans ON plan.id = LevelPlans.pid
                    WHERE LevelPlans.lid = ? AND Plan.id = ?''', (id2,id3))
     plan_data = cur.fetchone()
     
     conn.close()
     
-    if not sports_data or not level_data or not plan_data:
-        return "Data not found", 404
+   
 
     return render_template('plan.html', sports=sports_data, level=level_data, plan=plan_data)
  
+
+@app.route('/feedback', methods=['GET', 'POST'])
+def feedback():
+    if request.method == 'POST':
+        feedback = request.form['feedback']
+        # Process and store the feedback (you can store it in a database here)
+        # For demonstration purposes, let's just print it
+        print("User Feedback:", feedback)
+        return "Thank you for your feedback!"
+    return render_template('feedback.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
