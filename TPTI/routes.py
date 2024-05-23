@@ -33,6 +33,8 @@ def level(id1, id2):
     cur.execute('SELECT * FROM Level WHERE id=?', (id2,))
     level_data = cur.fetchone()
     
+
+    
     conn.close()
     
     # Check if data exists
@@ -57,13 +59,15 @@ def plan(id1, id2, id3):
     level_data = cur.fetchone()
 
     # Fetch plan data; ensure the query matches your table schema
-    cur.execute('SELECT * FROM plan WHERE id=?', (id3))
+    cur.execute('''SELECT Plan.* FROM Plan
+                   JOIN LevelPlans ON Plan.id = LevelPlans.pid
+                   WHERE LevelPlans.lid = ? AND Plan.id = ?''', (id2,id3))
     plan_data = cur.fetchone()
     
     conn.close()
     
-    if not plan_data:
-        return "Plan not found", 404
+    if not sports_data or not level_data or not plan_data:
+        return "Data not found", 404
 
     return render_template('plan.html', sports=sports_data, level=level_data, plan=plan_data)
  

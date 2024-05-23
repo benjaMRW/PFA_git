@@ -1,11 +1,10 @@
 {%extends 'layout.html'%}
 {%block content%}
 <h2>{{plan[1]}}</h2>
-
-
-<hr/>
-
-<p>{{plan[2]}}</p>
-
+<div>
+    {% for paragraph in plan[2].split('\n') %}
+        <p>{{ paragraph }}</p>
+    {% endfor %}
+</div>
 <hr/>
 {%endblock%}

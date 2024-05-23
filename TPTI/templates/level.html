@@ -1,15 +1,38 @@
 {%extends 'layout.html'%}
 {%block content%}
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>{{ sports[1] }} - {{ level[1] }}</title>
 </head>
 <body>
     <h1>{{ sports[1] }}</h1>
     <h2>{{ level[1] }}</h2>
-    <p>Details about the sport: {{ sports }}</p>
-    <p>Details about the level: {{ level }}</p>
-    <a href="/plan/{{sports[0]}}/{{level[0]}}/">hola</a>
+
+    {% if sports[0] == 2 and level[0] == 1 %}
+        <a href="/plan/2/1/1">Plan 1 Easy {{ sports[1] }}</a>
+        <a href="/plan/2/1/2">Plan 2 Easy {{ sports[1] }}</a>
+    {% endif %}
+    
+    {% if sports[0] == 2 and level[0] == 2 %}
+        <a href="/plan/2/2/3">Plan 1 Hard {{ sports[1] }}</a>
+        <a href="/plan/2/2/4">Plan 2 Hard {{ sports[1] }}</a>
+    {% endif %}
+    
+    {% if sports[0] == 1 and level[0] == 1 %}
+        <a href="/plan/1/1/5">Plan 1 Easy {{ sports[1] }}</a>
+        <a href="/plan/1/1/6">Plan 2 Easy {{ sports[1] }}</a>
+    {% endif %}
+    
+    {% if sports[0] == 1 and level[0] == 2 %}
+        <a href="/plan/1/2/7">Plan 1 Hard {{ sports[1] }}</a>
+        <a href="/plan/1/2/8">Plan 2 Hard {{ sports[1] }}</a>
+    {% endif %}
+    
+    <a href="/plan/{{ sports[0] }}/{{ level[0] }}/">Plan 2</a>
 </body>
+</html>
+
 
 
 {%endblock%}
