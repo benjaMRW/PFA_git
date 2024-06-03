@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import sqlite3 
 
 app = Flask(__name__)
@@ -71,15 +71,25 @@ def plan(id1, id2, id3):
     return render_template('plan.html', sports=sports_data, level=level_data, plan=plan_data)
  
 
+
+
 @app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if request.method == 'POST':
-        feedback = request.form['feedback']
-        # Process and store the feedback (you can store it in a database here)
-        # For demonstration purposes, let's just print it
-        print("User Feedback:", feedback)
-        return "Thank you for your feedback!"
-    return render_template('feedback.html')
+        name = request.form['name']
+        feeling = request.form['feeling']
+        feedback_text = request.form['feedback']
+
+        # Save feedback (in-memory storage)
+        feedback_storage.append({
+            'name': name,
+            'feeling': feeling,
+            'feedback': feedback_text
+        })
+
+        return redirect(url_for('feedback'))
+
+    return render_template('feedback.html', feedbacks=feedback_storage)
 
 if __name__ == "__main__":
     app.run(debug=True)

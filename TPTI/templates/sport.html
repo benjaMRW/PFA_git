@@ -3,14 +3,29 @@
 <h1> {{ Sports[1] }} Training levels</h1>
 <p>Welcome to your personalized training hub where we cater to both novice and experienced athletes. Whether you're just starting your journey as a {{Sports[1]}} or you're looking to push your limits and achieve new milestones, our training plans are designed to fit your needs. Choose your activity, and we'll guide you through plans that match your skill level. Let’s get started and make every step and pedal count!</p>
 
-<h2>Select Your Level:</h2>
+<center><h1>Select Your Level:</h2></center>
+
+  <div class="container">
+    <div class="content">
+      <center><h2>Begginer:</h2></center>
+      <p>Start your fitness journey with our beginner-level training plans. These plans are designed for those who are new to {{ Sports[1]}}, providing a gentle introduction with manageable distances and paces. You’ll build a solid foundation, improve your stamina, and develop a love for the sport in a safe and structured manner.</p>
+      <center><button class="button"><a href="/level/{{Sports[0] }}/1">Begginer</a></button></center>
+      
+    </div>
+
+    <div class="vertical-line"></div>
+    <div class="content">
+      <center><h2>Advanzed:</h2></center>
+      <p>Take your training to the next level with our advanced plans. Tailored for seasoned {{ Sports[1] }} enthusiasts, these programs incorporate higher intensity workouts, longer distances, and advanced techniques to help you reach peak performance. Challenge yourself and achieve your personal best with expert guidance every step of the way.</p>
+      <center><button class="button"><a href="/level/{{Sports[0] }}/2">Advanzed</a></button></center>
+          
+    </div>
+</div>
 
 
-<p>Start your fitness journey with our beginner-level training plans. These plans are designed for those who are new to {{ Sports[1]}}, providing a gentle introduction with manageable distances and paces. You’ll build a solid foundation, improve your stamina, and develop a love for the sport in a safe and structured manner.</p>
-<center><a class="button" href="/level/{{Sports[0] }}/1">Begginer</a></center>
 
-
-<p>Take your training to the next level with our advanced plans. Tailored for seasoned {{ Sports[1] }} enthusiasts, these programs incorporate higher intensity workouts, longer distances, and advanced techniques to help you reach peak performance. Challenge yourself and achieve your personal best with expert guidance every step of the way.</p>
-<center><a class="button" href="/level/{{Sports[0] }}/2">Advanzed</a></center>
-    
+<hr>
+  <left><button class="button">last page</button></left>
+  <right><button class="button">next page</button></right>
+  
 {%endblock%}
