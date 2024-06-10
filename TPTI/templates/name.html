@@ -1,0 +1,11 @@
+{%extends 'layout.html'%}
+{%block content%}
+{% if feedbacks %}
+        <h3>Feedback for {{ request.args.get('username') }}</h3>
+        <ul>
+        {% for content, date in feedbacks %}
+            <li><strong>{{ date }}:</strong> {{ content }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{%endblock%}
