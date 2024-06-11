@@ -1,14 +1,16 @@
 {%extends 'layout.html'%}
 {%block content%}
-<h2>{{plan[1]}}</h2>
+<h1>{{plan[1]}}</h1>
 <div>
     {% for paragraph in plan[2].split('\n') %}
         <p>{{ paragraph }}</p>
     {% endfor %}
 </div>
-<hr/>
-<feedback>
-    <p>leave your feedback of how this plan was and how did you felt to see how you improve throw years</p>
-    <a href="/feedback">feedback</a>
-</feedback>
+
+
+
+<hr>
+  <left><button class="button">last page</button></left>
+  <right><button class="button">next page</button></right>
+  
 {%endblock%}

@@ -1,0 +1,17 @@
+{%extends 'layout.html'%}
+{%block content%}
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>User Feedback</title>
+        </head>
+        <body>
+            <h1>Feedback for {{ username }}</h1>
+            <ul>
+                {% for content, date in feedbacks %}
+                    <li><strong>{{ date }}</strong>: {{ content }}</li>
+                {% endfor %}
+            </ul>
+        </body>
+        </html>
+{%endblock%}

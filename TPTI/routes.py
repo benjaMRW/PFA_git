@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3 
-
+from datetime import datetime
 app = Flask(__name__)
 
 @app.route('/')
@@ -70,16 +70,75 @@ def plan(id1, id2, id3):
 
     return render_template('plan.html', sports=sports_data, level=level_data, plan=plan_data)
  
+app.secret_key = 'your_secret_key'
 
+# Initialize the database
+def init_db():
+    conn = sqlite3.connect('feedback.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS feedback (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL,
+        content TEXT NOT NULL,
+        date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    ''')
+    conn.commit()
+    conn.close()
+
+init_db()
+
+# Route to render the feedback form and handle form submission
 @app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if request.method == 'POST':
-        feedback = request.form['feedback']
-        # Process and store the feedback (you can store it in a database here)
-        # For demonstration purposes, let's just print it
-        print("User Feedback:", feedback)
-        return "Thank you for your feedback!"
+        username = request.form.get('username')
+        content = request.form.get('content')
+
+        if not username or not content:
+            return "Username and content are required", 400
+
+        conn = sqlite3.connect('feedback.db')
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO feedback (username, content) VALUES (?, ?)', (username, content))
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('view_feedback', username=username))
+
     return render_template('feedback.html')
 
-if __name__ == "__main__":
+# Route to display feedback for a specific user
+@app.route('/user/<username>')
+def view_feedback(username):
+    feedbacks = []
+
+    if username:
+        conn = sqlite3.connect('feedback.db')
+        cursor = conn.cursor()
+        cursor.execute('SELECT content, date FROM feedback WHERE username = ? ORDER BY date DESC', (username,))
+        feedbacks = cursor.fetchall()
+        conn.close()
+
+    return render_template('UsersInfo.html', feedbacks=feedbacks, username=username)
+
+# Route to display all feedback
+@app.route('/DisplayFeedback')
+def display():
+    conn = sqlite3.connect('feedback.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT username, content, date FROM feedback ORDER BY date DESC')
+    feedbacks = cursor.fetchall()
+    conn.close()
+
+    return render_template('DisplayFeedback.html', feedbacks=feedbacks)
+
+if __name__ == '__main__':
     app.run(debug=True)
+conn = sqlite3.connect('feedback.db') 
+cursor = conn.cursor() 
+delete_statement = "DELETE FROM feedback WHERE id = 1, 2, 3, 4, 5, 6, 7;" 
+cursor.execute(delete_statement) 
+conn.commit() 
+conn.close()  
