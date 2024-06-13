@@ -7,9 +7,6 @@ app = Flask(__name__)
 def home():
     return render_template("home.html")
 
-@app.route('/about')
-def about():
-    return render_template("about.html")
 
 @app.route("/sport/<int:id>")
 def Sports(id):
@@ -88,27 +85,6 @@ def init_db():
     conn.close()
 
 init_db()
-
-# Route to render the feedback form and handle form submission
-@app.route('/feedback', methods=['GET', 'POST'])
-def feedback():
-    if request.method == 'POST':
-        username = request.form.get('username')
-        content = request.form.get('content')
-
-        if not username or not content:
-            return "Username and content are required", 400
-
-        conn = sqlite3.connect('feedback.db')
-        cursor = conn.cursor()
-        cursor.execute('INSERT INTO feedback (username, content) VALUES (?, ?)', (username, content))
-        conn.commit()
-        conn.close()
-
-        return redirect(url_for('view_feedback', username=username))
-
-    return render_template('feedback.html')
-
 # Route to display feedback for a specific user
 @app.route('/user/<username>')
 def view_feedback(username):
