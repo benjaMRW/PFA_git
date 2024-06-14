@@ -9,14 +9,14 @@
 
 <hr>
 
-<center><h1>what do you think about the plan?</h1></center>
-<form action="/DisplayFeedback" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required><br><br>
-    <label for="content">Feedback:</label>
-    <textarea id="content" name="content" required></textarea><br><br>
-    <button type="submit">Submit</button>
-</form>
+<center><h1>What do you think about the plan?</h1></center>
+    <form action="/feedback" method="post">
+        <label for="username">Name:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="content">Feedback:</label>
+        <textarea id="content" name="content" class="fixed-textarea" required></textarea><br><br>
+        <button type="submit">Submit</button>
+    </form>
 
   
 {%endblock%}

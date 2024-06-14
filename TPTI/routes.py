@@ -86,35 +86,49 @@ def init_db():
 
 init_db()
 # Route to display feedback for a specific user
-@app.route('/user/<username>')
-def view_feedback(username):
-    feedbacks = []
 
-    if username:
-        conn = sqlite3.connect('feedback.db')
-        cursor = conn.cursor()
-        cursor.execute('SELECT content, date FROM feedback WHERE username = ? ORDER BY date DESC', (username,))
-        feedbacks = cursor.fetchall()
-        conn.close()
 
-    return render_template('UsersInfo.html', feedbacks=feedbacks, username=username)
+@app.route('/feedback', methods=['POST'])
+def submit_feedback():
+    username = request.form.get('username')
+    content = request.form.get('content')
 
-# Route to display all feedback
-@app.route('/DisplayFeedback')
-def display():
+    if not username or not content:
+        return "Username and content are required", 400
+
     conn = sqlite3.connect('feedback.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT username, content, date FROM feedback ORDER BY date DESC')
-    feedbacks = cursor.fetchall()
+    cursor.execute('INSERT INTO feedback (username, content) VALUES (?, ?)', (username, content))
+    conn.commit()
     conn.close()
 
-    return render_template('DisplayFeedback.html', feedbacks=feedbacks)
+    return redirect('/DisplayFeedback')
 
+def format_name(username):
+    # Remove square brackets from the username
+    return username.replace('[', '').replace(']', '')
+
+
+# Route to display feedback
+@app.route('/DisplayFeedback')
+def display_feedback():
+    conn = sqlite3.connect('feedback.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT username, content, date FROM feedback')
+    feedbacks = cursor.fetchall()
+    conn.close()
+    
+    # Format the date
+    formatted_feedbacks = []
+    for feedback in feedbacks:
+        username, content, date = feedback
+        formatted_date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S').strftime('%d/%m/%Y')
+        formatted_username = format_name(username)
+        formatted_feedbacks.append((formatted_username, content, formatted_date))
+    
+    return render_template('DisplayFeedback.html', feedbacks=formatted_feedbacks)
+
+    
 if __name__ == '__main__':
     app.run(debug=True)
-conn = sqlite3.connect('feedback.db') 
-cursor = conn.cursor() 
-delete_statement = "DELETE FROM feedback WHERE id = 1, 2, 3, 4, 5, 6, 7;" 
-cursor.execute(delete_statement) 
-conn.commit() 
-conn.close()  
+
