@@ -9,10 +9,16 @@
 <body>
     <h1>All Feedback</h1>
     <ul>
-        {% for username, content, date in feedbacks %}
-            <li><strong>{{ date }}</strong> [{{ username }}]: {{ content }}</li>
+        {% for username, content, plan, date in feedbacks %}
+            <li>
+                <strong>{{ date }}</strong> [{{ username }}]: 
+                <br><strong>date:</strong> {{ plan }}
+                <br><strong>Feedback:</strong> {{ content }}
+            </li>
         {% endfor %}
+        
     </ul>
+    <a class="button" href="/">Home</a>
 </body>
 
 {%endblock%}

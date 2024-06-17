@@ -67,66 +67,45 @@ def plan(id1, id2, id3):
 
     return render_template('plan.html', sports=sports_data, level=level_data, plan=plan_data)
  
-app.secret_key = 'your_secret_key'
-
-# Initialize the database
-def init_db():
-    conn = sqlite3.connect('feedback.db')
-    cursor = conn.cursor()
-    cursor.execute('''
-    CREATE TABLE IF NOT EXISTS feedback (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT NOT NULL,
-        content TEXT NOT NULL,
-        date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )
-    ''')
-    conn.commit()
-    conn.close()
-
-init_db()
-# Route to display feedback for a specific user
-
-
 @app.route('/feedback', methods=['POST'])
 def submit_feedback():
     username = request.form.get('username')
     content = request.form.get('content')
+    plan = request.form.get('plan')
 
-    if not username or not content:
-        return "Username and content are required", 400
+    if not username or not content or not plan:
+        return "Username, content, and plan are required", 400
 
-    conn = sqlite3.connect('feedback.db')
+    conn = sqlite3.connect('PFA.db')
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO feedback (username, content) VALUES (?, ?)', (username, content))
+    cursor.execute('INSERT INTO feedback (username, content, plan, date) VALUES (?, ?, ?, ?)', 
+                   (username, content, plan, datetime.now()))
     conn.commit()
     conn.close()
 
     return redirect('/DisplayFeedback')
 
-def format_name(username):
-    # Remove square brackets from the username
-    return username.replace('[', '').replace(']', '')
-
-
-# Route to display feedback
 @app.route('/DisplayFeedback')
 def display_feedback():
-    conn = sqlite3.connect('feedback.db')
+    conn = sqlite3.connect('PFA.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT username, content, date FROM feedback')
+    cursor.execute('SELECT username, content, date, plan FROM feedback')
     feedbacks = cursor.fetchall()
     conn.close()
-    
-    # Format the date
+
     formatted_feedbacks = []
     for feedback in feedbacks:
-        username, content, date = feedback
-        formatted_date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S').strftime('%d/%m/%Y')
-        formatted_username = format_name(username)
-        formatted_feedbacks.append((formatted_username, content, formatted_date))
-    
+        username, content, date_str, plan = feedback
+        # Remove any trailing milliseconds if present
+        date_str = date_str.split('.')[0]
+        formatted_date = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S').strftime('%d/%m/%Y')
+        formatted_feedbacks.append((username, content, formatted_date, plan))
+
     return render_template('DisplayFeedback.html', feedbacks=formatted_feedbacks)
+
+def format_name(username):
+    return username.replace('[', '').replace(']', '')
+
 
     
 if __name__ == '__main__':
