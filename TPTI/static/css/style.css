@@ -98,8 +98,8 @@ h2{
      padding: 12px;
      text-decoration: none;
      font-size: 30px;
-     line-height: 25px;
-     border-radius: 4px;
+     line-height: 40px;
+     border-radius: 12px;
      font-family: 'Roboto Condensed', sans-serif;
      font-style: italic;
      margin-left: 4px;
@@ -122,6 +122,7 @@ h2{
    /* Float the link section to the right */
    .header-right {
      float: right;
+     
    }
    
    /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
