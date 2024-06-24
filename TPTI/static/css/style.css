@@ -6,6 +6,16 @@ h1{
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 250%;
   color: #003366;
+  clear: both;
+  margin-top: 10px; /* Add some space above headings */
+}
+h2
+{
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 280%;
+  color: #003366;
+  clear: both;
+  margin-top: 10px; /* Add some space above headings */
 }
 p{
   font-family: 'Roboto Condensed', sans-serif;
@@ -159,15 +169,37 @@ img{
 
 .container {
   display: flex;
-  align-items: center;
   justify-content: center;
-  height: 65vh; /* Full viewport height for demonstration */
+ 
+  align-items: stretch;
+  
 }
+.tall-container {
+  height: 75vh; /* Adjust height for tall container */
+}
+.short-container {
+  height: auto; /* Adjust height for short container */
+  margin: 10px;
+}
+
 .content {
   flex: 1;
-  padding: 15x;
-  text-align: center;
+  padding: 20px;
+  text-align: auto;
+  height: auto;
+  box-sizing: border-box;
 }
+.content.left,
+.content.right {
+    display: flex;
+    flex-direction: column;
+    height: auto
+}
+.left
+{
+text-align: left;
+}
+
 .vertical-line {
   width: 2px;
   background-color: #333;
@@ -180,6 +212,20 @@ t
   
  
 }
+.text-content {
+  width: 70%; /* Adjust width as needed */
+  margin-right: 20px; /* Add some space between text and image */
+}
+
+.image-content {
+  width: 24%; /* Adjust width as needed */
+}
+
+.image-content img {
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 2px 4px navy;
+}
 footer{
   color: #002379;
 }
@@ -188,6 +234,7 @@ button1 {
   size: 50%;
   
 }  
+
 
 form {
    margin-left:auto;
@@ -277,4 +324,19 @@ select {
     font-size: 16px;
     box-sizing: border-box;
 }
-        
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  background: #000;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

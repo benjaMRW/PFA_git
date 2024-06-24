@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import sqlite3 
 from datetime import datetime
+import re
 app = Flask(__name__)
 
 @app.route('/')
@@ -67,6 +68,52 @@ def plan(id1, id2, id3):
 
     return render_template('plan.html', sports=sports_data, level=level_data, plan=plan_data)
  
+bad_names = [
+    'racistname',
+    'offensivename',
+    'vulgarnickname',
+    'inappropriatename',
+    'insultingalias',
+    'discriminatoryname',
+    'expletivehandle',
+    'offensivehandle',
+    'tabooname',
+    'bannedname',
+    'inflammatoryterm',
+    'disrespectfulname',
+    'hatespeechname',
+    'profanepersona',
+    'defamatoryname',
+    'obscenehandle',
+    'controversialalias',
+    'derogatoryname',
+    'explicitnickname',
+    'provocativename'
+]
+bad_words = [
+    'abuse',
+    'asshole',
+    'bastard',
+    'bitch',
+    'cock',
+    'cunt',
+    'damn',
+    'dick',
+    'fuck',
+    'jerk',
+    'piss',
+    'shit',
+    'slut',
+    'whore',
+    'nigger',
+    'faggot',
+    'retard',
+    'spastic',
+    'twat',
+    'wanker'
+    # Add more words as necessary
+]
+
 @app.route('/feedback', methods=['POST'])
 def submit_feedback():
     username = request.form.get('username')
@@ -76,9 +123,13 @@ def submit_feedback():
     if not username or not content or not plan:
         return "Username, content, and plan are required", 400
 
+    # Check for bad words in the content
+    if has_bad_words(content):
+        return jsonify({'error': 'Feedback contains inappropriate content'}), 400
+
     conn = sqlite3.connect('PFA.db')
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO feedback (username, content, plan, date) VALUES (?, ?, ?, ?)', 
+    cursor.execute('INSERT INTO feedback (username, content, plan, date) VALUES (?, ?, ?, ?)',
                    (username, content, plan, datetime.now()))
     conn.commit()
     conn.close()
@@ -103,11 +154,17 @@ def display_feedback():
 
     return render_template('DisplayFeedback.html', feedbacks=formatted_feedbacks)
 
-def format_name(username):
-    return username.replace('[', '').replace(']', '')
+# Function to check for bad words
+def has_bad_words(feedback):
+    # Convert feedback to lowercase to make the filter case-insensitive
+    feedback_lower = feedback.lower()
 
+    # Check if feedback contains any of the bad words
+    for word in bad_words:
+        if re.search(r'\b' + re.escape(word) + r'\b', feedback_lower):
+            return True  # Found a bad word
 
-    
+    return False  # No bad words found
+
 if __name__ == '__main__':
     app.run(debug=True)
-

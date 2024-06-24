@@ -1,16 +1,42 @@
 {%extends 'layout.html'%}
 {%block content%}
-<h1>{{plan[1]}}</h1>
-<div>
-    {% for paragraph in plan[2].split('\n') %}
+<h1>how this page works?</h1>
+<p>If you have any questions about technique, we recommend watching the videos provided on this page. They offer valuable insights and guidance to help you improve your skills. <span>At the bottom, there is a feedback section where you can let us know what to improve.</span></p>
+
+<div class="container">
+    <div class="content left">
+        <h1>{{plan[1]}}</h1>
+        {% for paragraph in plan[2].split('\n') %}
         <p>{{ paragraph }}</p>
-    {% endfor %}
+        {% endfor %}
+    </div>
+    <div class="content right">
+        
+        <h1>Running technique video:</h1>
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/brFHyOtTwH4" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <h1>Strength exercises video:</h1>
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Eb1YHxCKo2E" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <h1>Cycling errors video (improve technique):</h1>
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/x4WHeVf5DN4" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <h1>Stretching exercises video:</h1>
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/EvMTrP8eRvM" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
 </div>
+
 
 <hr>
 
 
 <center><h1>What do you think about the plan?</h1></center>
+<center><p>We value your feedback! Please let us know what you liked and what you think we can improve upon.</p></center>
 <form action="/feedback" method="POST">
     <label for="username">Name:</label>
     <input type="text" id="username" name="username" required><br><br>
@@ -27,5 +53,7 @@
     </select><br><br>
     <button type="submit">Submit</button>
 </form>
-  
+<p></p>
+
+
 {%endblock%}
