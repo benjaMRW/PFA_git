@@ -5,7 +5,7 @@
 h1{
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 250%;
-  color: #003366;
+  color: orange;
   clear: both;
   margin-top: 10px; /* Add some space above headings */
 }
@@ -13,18 +13,18 @@ h2
 {
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 280%;
-  color: #003366;
+  color: navy;
   clear: both;
   margin-top: 10px; /* Add some space above headings */
 }
 p{
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 220%;
-  color: #333333;
+  color: navy;
 }
 html
 {
- background: linear-gradient(lightgrey, white ,lightgrey,white, lightgrey);
+ background: linear-gradient(#FAF3E0, #FFF8E1,#FAF3E0, #FFF8E1);
   color: #002379;
 }
 
@@ -86,7 +86,7 @@ h2{
    }
    .header logo{
     float: left;
-     color: #003366;
+     color: orange;
      text-align: center;
      padding: 12px;
      text-decoration: none;
@@ -101,7 +101,7 @@ h2{
    }
    /* Style the header links */
    .header a {
-    background-color: #002379;
+    background-color: orange;
      float: left;
      color: white;
      text-align: center;
@@ -189,11 +189,25 @@ img{
   height: auto;
   box-sizing: border-box;
 }
-.content.left,
+
 .content.right {
-    display: flex;
-    flex-direction: column;
-    height: auto
+  display: flex;
+  flex-direction: column; /* Align items in a column */
+  
+  height: auto; /* Adjust height based on content */
+  padding: 20px; /* Add some padding for spacing */
+  box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+  gap: 4px; /* Add a small gap between items */
+}
+.content.left
+{
+  display: flex;
+  flex-direction: column; /* Align items in a column */
+  
+  height: auto;
+  padding: 20px; /* Add some padding for spacing */
+  box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+  gap: 1px; /* Add a small gap between items */
 }
 .left
 {
@@ -224,7 +238,7 @@ t
 .image-content img {
   max-width: 100%;
   height: auto;
-  box-shadow: 0 2px 4px navy;
+  
 }
 footer{
   color: #002379;

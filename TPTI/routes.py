@@ -68,51 +68,7 @@ def plan(id1, id2, id3):
 
     return render_template('plan.html', sports=sports_data, level=level_data, plan=plan_data)
  
-bad_names = [
-    'racistname',
-    'offensivename',
-    'vulgarnickname',
-    'inappropriatename',
-    'insultingalias',
-    'discriminatoryname',
-    'expletivehandle',
-    'offensivehandle',
-    'tabooname',
-    'bannedname',
-    'inflammatoryterm',
-    'disrespectfulname',
-    'hatespeechname',
-    'profanepersona',
-    'defamatoryname',
-    'obscenehandle',
-    'controversialalias',
-    'derogatoryname',
-    'explicitnickname',
-    'provocativename'
-]
-bad_words = [
-    'abuse',
-    'asshole',
-    'bastard',
-    'bitch',
-    'cock',
-    'cunt',
-    'damn',
-    'dick',
-    'fuck',
-    'jerk',
-    'piss',
-    'shit',
-    'slut',
-    'whore',
-    'nigger',
-    'faggot',
-    'retard',
-    'spastic',
-    'twat',
-    'wanker'
-    # Add more words as necessary
-]
+
 
 @app.route('/feedback', methods=['POST'])
 def submit_feedback():
@@ -154,17 +110,57 @@ def display_feedback():
 
     return render_template('DisplayFeedback.html', feedbacks=formatted_feedbacks)
 
+# List of bad words
+bad_words = [
+    'abuse', 'asshole', 'bastard', 'bitch', 'cock', 'cunt', 'damn', 'dick',
+    'fuck', 'jerk', 'piss', 'shit', 'slut', 'whore', 'nigger', 'faggot',
+    'retard', 'spastic', 'twat', 'wanker', 'arsehole', 'bollocks', 'bugger',
+    'chink', 'coon', 'crap', 'douche', 'dyke', 'fag', 'gook', 'guido', 'heeb',
+    'homo', 'jap', 'kike', 'kraut', 'lesbo', 'limey', 'mick', 'nazi', 'paki',
+    'pollack', 'prick', 'raghead', 'spic', 'tard', 'tranny', 'wetback', 'zipperhead',
+    # Variations with numbers or special characters
+    'nigg4', 'f4ggot', 'c*nt', 'sh!t', 'b!tch', 'd!ck'
+]
+
 # Function to check for bad words
 def has_bad_words(feedback):
     # Convert feedback to lowercase to make the filter case-insensitive
     feedback_lower = feedback.lower()
 
-    # Check if feedback contains any of the bad words
-    for word in bad_words:
-        if re.search(r'\b' + re.escape(word) + r'\b', feedback_lower):
-            return True  # Found a bad word
+    # Create regex patterns to match bad words with variations
+    patterns = [re.escape(word).replace('\\*', '[*]').replace('\\!', '[!]').replace('4', '[4a@]') for word in bad_words]
+    
+    # Combine patterns into one regex
+    combined_pattern = r'(' + '|'.join(patterns) + r')'
+    
+    # Check if feedback contains any of the bad words or their variations
+    if re.search(combined_pattern, feedback_lower):
+        return True  # Found a bad word
 
     return False  # No bad words found
 
+
+def delete_feedback_records(ids):
+    # Connect to the database
+    conn = sqlite3.connect('PFA.db')
+    curs = conn.cursor()
+
+    # Create a parameterized query to delete records with specific ids
+    query = "DELETE FROM feedback WHERE id IN ({})".format(','.join('?' for _ in ids))
+    curs.execute(query, ids)
+
+    # Commit the changes
+    conn.commit()
+
+    # Close the connection
+    conn.close()
+
+# Call the function with the IDs to delete
+delete_feedback_records([4, 6])
 if __name__ == '__main__':
     app.run(debug=True)
+   
+   
+
+
+
