@@ -1,24 +1,28 @@
-{%extends 'layout.html'%}
-{%block content%}
+{% extends 'layout.html' %}
+{% block content %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>All Feedback</title>
-    
+    <style>
+        .button-container {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <h1>All Feedback</h1>
     <ul>
         {% for username, content, plan, date in feedbacks %}
             <li>
-                <strong>{{ date }}</strong> [{{ username }}]: 
-                <br><strong>date:</strong> {{ plan }}
+                 [{{ username }}]: <strong>{{ date }}</strong>
+                <br><strong>Plan:</strong> {{ plan }}
                 <br><strong>Feedback:</strong> {{ content }}
             </li>
         {% endfor %}
-        
     </ul>
-    <a class="button" href="/">go back to home page</a>
-</body>
 
-{%endblock%}
+</body>
+</html>
+{% endblock %}
