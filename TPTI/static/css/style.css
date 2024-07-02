@@ -106,8 +106,8 @@ h2{
   text-align: center;
   
   text-decoration: none;
-  font-size: 90px;
-  line-height: 25px;
+  font-size: 100px;
+  line-height: 25px; 
   border-radius: 4px;
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: bold;
@@ -419,3 +419,7 @@ select {
 .feedback-list li .plan, .feedback-list li .content {
   margin-top: 5px;
 }
+.content-block {
+  padding: 20px; /* Example padding */
+  border: 1px solid #ccc; /* Example border */
+  /* Additional styling as needed */
