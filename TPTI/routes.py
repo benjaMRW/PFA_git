@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, session, j
 import sqlite3 
 from datetime import datetime
 import re
+import requests
+from bs4 import BeautifulSoup
 app = Flask(__name__)
 
 @app.route('/')
@@ -159,6 +161,10 @@ def delete_feedback_records(ids):
 
 # Call the function with the IDs to delete
 delete_feedback_records([12])
+
+            
+          
+
 if __name__ == '__main__':
     app.run(debug=True)
    

@@ -26,6 +26,7 @@ html
 {
  background: linear-gradient(#FAF3E0, #FFF8E1,#FAF3E0, #FFF8E1);
   color: #002379;
+  padding: 2px;
 }
 
 ul
@@ -332,6 +333,7 @@ li {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: left;
   font-size: 25PX;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 li strong {
   color: navy;
@@ -419,7 +421,3 @@ select {
 .feedback-list li .plan, .feedback-list li .content {
   margin-top: 5px;
 }
-.content-block {
-  padding: 20px; /* Example padding */
-  border: 1px solid #ccc; /* Example border */
-  /* Additional styling as needed */
