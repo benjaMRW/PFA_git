@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, j
 import sqlite3 
 from datetime import datetime
 import re
-import requests
+
 from bs4 import BeautifulSoup
 app = Flask(__name__)
 
@@ -130,8 +130,31 @@ def has_bad_words(username, feedback):
     username_lower = username.lower()
     feedback_lower = feedback.lower()
 
+    # Define a dictionary of common letter substitutions
+    substitutions = {
+        'a': '[a4@*]',
+        'b': '[b8]',
+        'c': '[c\\(]',
+        'e': '[e3]',
+        'g': '[g9]',
+        'i': '[i1!|]',
+        'l': '[l1!|]',
+        'o': '[o0]',
+        's': '[s5\\$]',
+        't': '[t7+]',
+        'z': '[z2]',
+        'u': '[*]'
+    }
+    
+    # Function to create regex pattern with substitutions
+    def create_pattern(word):
+        pattern = ''
+        for char in word:
+            pattern += substitutions.get(char, char)
+        return pattern
+
     # Create regex patterns to match bad words with variations
-    patterns = [re.escape(word).replace('\\*', '[*]').replace('\\!', '[!]').replace('4', '[4a@]') for word in bad_words]
+    patterns = [create_pattern(word) for word in bad_words]
     
     # Combine patterns into one regex
     combined_pattern = r'(' + '|'.join(patterns) + r')'
@@ -143,14 +166,13 @@ def has_bad_words(username, feedback):
     return False  # No bad words found
 
 
-
 def delete_feedback_records(ids):
     # Connect to the database
     conn = sqlite3.connect('PFA.db')
     curs = conn.cursor()
 
     # Create a parameterized query to delete records with specific ids
-    query = "DELETE FROM feedback WHERE id IN ({})".format('12 ,'.join('?' for _ in ids))
+    query = "DELETE FROM feedback WHERE id IN ({})".format('15 ,'.join('?' for _ in ids))
     curs.execute(query, ids)
 
     # Commit the changes
@@ -160,7 +182,7 @@ def delete_feedback_records(ids):
     conn.close()
 
 # Call the function with the IDs to delete
-delete_feedback_records([12])
+delete_feedback_records([15])
 
             
           
