@@ -3,6 +3,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <center><h1>What do you think about the plan?</h1></center>
+<center><p>We value your feedback! Please let us know what you liked and what you think we can improve upon.</p></center>
+<form action="/feedback" method="POST">
+    <label for="username">Name:</label>
+    <input type="text" id="username" name="username" required><br><br>
+    <label for="content">Feedback:</label>
+    <input type="text" id="content" name="content" required></input><br><br>
+    <label for="plan">Plan:</label>
+    <select id="plan" name="plan" required>
+        <option value="easy running one">Easy Running Plan One</option>
+        <option value="easy running two">Easy Running Plan Two</option>
+        <option value="hard running plan one">Hard Running Plan One</option>
+        <option value="hard running plan two">Hard Running Plan Two</option>
+        <option value="easy cycling plan one">Easy Cycling Plan One </option>
+        <option value="easy cycling plan two">Easy Cycling Plan Two</option>
+        <option value="hard cycling plan one">Hard Cycling Plan One</option>
+        <option value="hard cycling plan two">Hard Cycling Plan Two</option>
+    </select><br><br>
+    <button type="submit">Submit</button>
+</form>
+<p></p>
+
+
     <meta charset="UTF-8">
     <title>All Feedback</title>
    

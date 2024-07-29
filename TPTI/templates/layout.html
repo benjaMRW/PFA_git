@@ -16,8 +16,8 @@
       <logo>PeakForm-Academy</logo></left>
       <div class="header-right">
         <a class="button" href="/">Home</a>
-        <a href="/DisplayFeedback" class="button">Feedback</a>
-        
+        <a class="button" href="/DisplayFeedback" >feedback</a>
+      
       </div>
     </div>
   </header>
@@ -25,7 +25,10 @@
   
   <main>
    
-    {% block content %}{% endblock %}
+    <div class="content-block">
+      {% block content %}
+      {% endblock %}
+  </div>
   
   </main>
   

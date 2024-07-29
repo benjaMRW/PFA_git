@@ -85,6 +85,7 @@ h2{
   color: #002379;
   display: flex;
   align-items: center;
+  line-height: 40px;
 }
 
 .header l {
@@ -114,10 +115,10 @@ h2{
   font-weight: bold;
   font-style: italic;
   text-shadow: 2px 2px 4px white;
-  margin-left: 10px; /* Add some space between the logo image and the text */
+  margin-left: 5px; /* Add some space between the logo image and the text */
 }
 
-.header-right {
+  .header .header-right {
   margin-left: auto; /* Pushes the buttons to the right */
   display: flex;
   align-items: center;
@@ -128,11 +129,11 @@ h2{
     background-color: orange;
      float: left;
      color: white;
-     text-align: center;
+     
      padding: 12px;
      text-decoration: none;
-     font-size: 30px;
-     line-height: 40px;
+     font-size: 50px;
+     line-height: 30px;
      border-radius: 12px;
      font-family: 'Roboto Condensed', sans-serif;
      font-style: italic;
@@ -156,6 +157,7 @@ h2{
    /* Float the link section to the right */
    .header-right {
      float: right;
+
      
    }
    
