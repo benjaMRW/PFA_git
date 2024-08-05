@@ -126,7 +126,7 @@ def has_bad_words(username, feedback):
 
     # Define a dictionary of common letter substitutions
     substitutions = {
-        'a': '[a4@*]',
+        'a': '[a4@]',
         'b': '[b8]',
         'c': '[c\\(]',
         'e': '[e3]',
@@ -136,8 +136,8 @@ def has_bad_words(username, feedback):
         'o': '[o0]',
         's': '[s5\\$]',
         't': '[t7+]',
-        'z': '[z2]',
-        'u': '[*]'
+        'u': '[uµ]',
+        'z': '[z2]'
     }
     
     # Function to create regex pattern with substitutions
@@ -158,7 +158,6 @@ def has_bad_words(username, feedback):
         return True  # Found a bad word
 
     return False  # No bad words found
-
 def delete_feedback_records(ids):
     # Connect to the database
     conn = sqlite3.connect('PFA.db')
@@ -174,7 +173,7 @@ def delete_feedback_records(ids):
     conn.close()
 
 # Call the function with the IDs to delete
-delete_feedback_records([15])
+delete_feedback_records([25])
 
 if __name__ == '__main__':
     app.run(debug=True)
