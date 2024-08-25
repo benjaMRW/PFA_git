@@ -5,6 +5,7 @@ import re
 
 from bs4 import BeautifulSoup
 #homepage
+
 app = Flask(__name__)
 @app.route('/')
 def home():
@@ -173,7 +174,7 @@ def delete_feedback_records(ids):
     conn.close()
 
 # Call the function with the IDs to delete
-delete_feedback_records([25])
+delete_feedback_records([26])
 
 if __name__ == '__main__':
     app.run(debug=True)

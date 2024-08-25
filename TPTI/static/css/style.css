@@ -7,7 +7,9 @@ h1 {
   color: orange;
   clear: both;
   margin-top: 10px;
+  
 }
+
 
 h2 {
   font-family: 'Roboto Condensed', sans-serif;
@@ -88,6 +90,8 @@ a2 {
   display: flex;
   align-items: center;
   line-height: 40px;
+  font-family: 'Roboto Condensed', sans-serif;
+  
 }
 
 .header l, .header logo {
@@ -112,6 +116,7 @@ a2 {
   margin-left: auto; /* Pushes the buttons to the right */
   display: flex;
   align-items: center;
+  
 }
 
 /* Header link styling */
@@ -252,9 +257,13 @@ t {
   width: 24%; /* Adjust width as needed */
 }
 
+
 .image-content img {
   max-width: 100%;
   height: auto;
+  transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
 }
 
 /* Button styling */
