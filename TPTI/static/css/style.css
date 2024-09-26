@@ -26,6 +26,7 @@ p {
 }
 p2{
   font-size: 100%;
+  color: #000;
 }
 html {
   background: linear-gradient(#FAF3E0, #FFF8E1, #FAF3E0, #FFF8E1);
